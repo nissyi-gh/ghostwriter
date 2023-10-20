@@ -10,5 +10,11 @@
       "matches": ["https://chat.openai.com/*"],
       "js": ["./content/chatgpt/content.js"]
     }
+  ],
+  "web_accessible_resources" : [
+    {
+      "matches": ["<all_urls>"],
+      "resources": ["/images/ghost_writer_128.png"]
+    }
   ]
 }
