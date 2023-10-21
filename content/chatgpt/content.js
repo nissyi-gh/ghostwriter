@@ -5,6 +5,10 @@ const ghostWriterButton = document.createElement('button');
 ghostWriterButton.className = 'ghost-writer-button';
 
 ghostWriterButton.appendChild(ghostWriterIconImage);
-// プロンプト送信ボタンの前にアイコンを挿入
-const buttonElement = document.querySelector('[data-testid="send-button"]');
-buttonElement.parentNode.insertBefore(ghostWriterButton, buttonElement);
+
+const addGhostWriter = () => {
+  const buttonElement = document.querySelector('[data-testid="send-button"]');
+  buttonElement.parentNode.insertBefore(ghostWriterButton, buttonElement);
+};
+
+addGhostWriter();
