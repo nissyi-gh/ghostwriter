@@ -12,3 +12,10 @@ const addGhostWriter = () => {
 };
 
 addGhostWriter();
+
+// TODO: 767px以下のタブレットサイズになると表示されないので対応する
+document.querySelector('#__next nav').addEventListener('click', () => {
+  setTimeout(() => {
+    addGhostWriter();
+  }, 500);
+});
