@@ -15,7 +15,10 @@
   "web_accessible_resources" : [
     {
       "matches": ["<all_urls>"],
-      "resources": ["/images/ghost_writer_128.png"]
+      "resources": [
+        "/images/ghost_writer_128.png",
+        "/content/prompt_list.html"
+      ]
     }
   ]
 }
