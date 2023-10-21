@@ -13,7 +13,9 @@ fetch(chrome.runtime.getURL('content/prompt_list.html'))
       const promptList = document.createElement('div');
       promptList.innerHTML = data;
       promptList.className = 'ghost-writer-prompt-list';
-      ghostWriterButton.appendChild(promptList);
+
+      const promptTextArea = document.querySelector('#prompt-textarea')
+      promptTextArea.parentNode.insertBefore(promptList, promptTextArea);
     })
     .catch(error => console.error(error));
 
