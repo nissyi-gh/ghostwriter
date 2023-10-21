@@ -1,0 +1,13 @@
+.ghost-writer-button {
+  height: 40px;
+  width: 40px;
+  top: 6px;
+  position: absolute;
+  right: 40px;
+}
+
+@media (max-width: 767px) {
+  .ghost-writer-button {
+    top: 0px; /* topプロパティを初期値に戻す */
+  }
+}
