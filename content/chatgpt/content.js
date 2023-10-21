@@ -7,7 +7,7 @@ ghostWriterButton.className = 'ghost-writer-button';
 ghostWriterButton.appendChild(ghostWriterIconImage);
 
 // プロンプトリストを描画する
-fetch(chrome.runtime.getURL('content/prompt_list.html'))
+fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
     .then(response => response.text())
     .then(data => {
       const promptList = document.createElement('div');
