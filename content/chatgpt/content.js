@@ -6,6 +6,17 @@ ghostWriterButton.className = 'ghost-writer-button';
 
 ghostWriterButton.appendChild(ghostWriterIconImage);
 
+// プロンプトリストを描画する
+fetch(chrome.runtime.getURL('content/prompt_list.html'))
+    .then(response => response.text())
+    .then(data => {
+      const promptList = document.createElement('div');
+      promptList.innerHTML = data;
+      promptList.className = 'ghost-writer-prompt-list';
+      ghostWriterButton.appendChild(promptList);
+    })
+    .catch(error => console.error(error));
+
 const addGhostWriter = () => {
   const buttonElement = document.querySelector('[data-testid="send-button"]');
   buttonElement.parentNode.insertBefore(ghostWriterButton, buttonElement);
