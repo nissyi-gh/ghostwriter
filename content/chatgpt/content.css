@@ -8,6 +8,6 @@
 
 @media (max-width: 767px) {
   .ghost-writer-button {
-    top: -4px; /* topプロパティを初期値に戻す */
+    top: 0px; /* topプロパティを初期値に戻す */
   }
 }
