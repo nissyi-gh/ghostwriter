@@ -45,3 +45,11 @@ function deleteDB(callback) {
 
 // 初期化の実験を開始
 deleteDB(initDB);
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log(message);
+  if (message.action === "get") {
+    sendResponse('contents');
+    return true;
+  }
+});

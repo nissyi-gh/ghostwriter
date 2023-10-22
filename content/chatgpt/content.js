@@ -23,7 +23,14 @@ const applyPrompt = (prompt) => {
   textarea.style.height = `${textareaHeight}px`;
 }
 
+function getTextFromDB() {
+  chrome.runtime.sendMessage({ action: "get" }, (data) => {
+    console.log(data);
+  });
+}
+
 const addPromptList = () => {
+  getTextFromDB();
   // プロンプトリストを描画する
   fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
     .then(response => response.text())
