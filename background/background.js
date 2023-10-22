@@ -43,13 +43,40 @@ function deleteDB(callback) {
   };
 }
 
+function fetchAllPrompts() {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("prompts", "readonly");
+    const objectStore = transaction.objectStore("prompts");
+    const request = objectStore.getAll();
+
+    request.onsuccess = function(event) {
+      const data = event.target.result;
+
+      if (data && data.length) {
+        resolve(data);
+      } else {
+        console.log("No data found in database.");
+        resolve([]);
+      }
+    };
+
+    request.onerror = function(event) {
+      console.log("Error fetching data:", event);
+      reject(new Error("Error fetching data from IndexedDB."));
+    };
+  });
+}
 // 初期化の実験を開始
 deleteDB(initDB);
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log(message);
   if (message.action === "get") {
-    sendResponse('contents');
+    fetchAllPrompts().then(data => {
+      sendResponse(data);
+    }).catch(error => {
+      sendResponse({error: error.message});
+    });
     return true;
   }
 });
