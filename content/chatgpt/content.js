@@ -110,10 +110,16 @@ const addPromptList = () => {
         promptForm.style.display = 'none';
       })
 
+      // プロンプト追加フォームの送信
       document.getElementById("gw-prompt-add-form").addEventListener('submit', (event) => {
         event.preventDefault();
         const title = document.querySelector('input[name="title"]').value;
         const prompt = document.querySelector('textarea[name="prompt"]').value;
+
+        if (prompt.match(/^\s*$/)) {
+          alert('プロンプトを入力してください');
+          return;
+        }
 
         addPromptDB(title, prompt).then(() => {
           const promptList = document.getElementById("ghost-writer-prompts");
