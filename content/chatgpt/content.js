@@ -63,17 +63,16 @@ const addPromptList = () => {
         const promptList = document.getElementById("ghost-writer-prompts");
         data.forEach((prompt) => {
           addLiPromptItem(promptList, prompt.title, prompt.prompt);
+          document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
+            li.addEventListener('click', () => {
+              if (document.getElementById("selected")) {
+                document.getElementById("selected").removeAttribute("id");
+              }
+              li.setAttribute("id", "selected");
+            });
+          })
         })
       }).catch(error => console.error(error));
-
-      document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
-        li.addEventListener('click', () => {
-          if (document.getElementById("selected")) {
-            document.getElementById("selected").removeAttribute("id");
-          }
-          li.setAttribute("id", "selected");
-        });
-      })
 
       // プロンプト適用ボタン
       document.getElementById("gw-prompt-override").addEventListener('click', () => {
