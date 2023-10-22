@@ -5,10 +5,10 @@ const ghostWriterButton = document.createElement('button');
 ghostWriterButton.className = 'ghost-writer-button';
 ghostWriterButton.addEventListener('click', () => {
   const promptList = document.getElementById("gw-list-wrapper")
-  if (promptList.hasAttribute("hidden")) {
-    promptList.removeAttribute("hidden");
+  if (promptList.style.display === 'none') {
+    promptList.style.display = 'block';
   } else {
-    promptList.setAttribute("hidden", true);
+    promptList.style.display = 'none';
   }
 })
 
