@@ -23,8 +23,9 @@ const applyPrompt = (prompt) => {
   textarea.style.height = `${textareaHeight}px`;
 }
 
-// プロンプトリストを描画する
-fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
+const addPromptList = () => {
+  // プロンプトリストを描画する
+  fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
     .then(response => response.text())
     .then(data => {
       const promptList = document.createElement('div');
@@ -50,10 +51,12 @@ fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
       })
     })
     .catch(error => console.error(error));
+}
 
 const addGhostWriter = () => {
   const buttonElement = document.querySelector('[data-testid="send-button"]');
   buttonElement.parentNode.insertBefore(ghostWriterButton, buttonElement);
+  addPromptList();
 };
 
 addGhostWriter();
