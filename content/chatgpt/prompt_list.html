@@ -1,42 +1,22 @@
 <!DOCTYPE html>
 <div class="list-boarder" id="gw-list-wrapper" hidden="true">
-  <ol id="ghost-writer-prompts">
-    <li id="1">
-      <p>title 1</p>
-      <p>ここにプロンプト</p>
-    </li>
-    <li>
-      <p>title 2</p>
-      <p>ここにプロンプト</p>
-    </li>
-  </ol>
+  <ol id="ghost-writer-prompts"></ol>
   <hr>
   <p>適用したいプロンプトを選んでね。</p>
   <button id="gw-prompt-override" class="gw-button">
     適用
   </button>
-  <!-- <button id="gw-prompt-add" class="gw-button">
-    追加
-  </button> -->
+  <button id="gw-prompt-add" class="gw-button">
+    プロンプトの追加
+  </button>
 </div>
-<style>
-  .list-boarder {
-    background-color: #3e3f48;
-    border: 2px solid rgb(189, 193, 196);
-    border-radius: 8px;
-    width: 100%;
-    position: absolute;
-    bottom: 120px;
-    color: white;
-    padding: 8px;
-  }
-
-  .gw-button {
-    background-color: #5c5c5c;
-    border: 2px solid rgb(189, 193, 196);
-    border-radius: 8px;
-    color: white;
-    padding: 8px;
-    margin: 8px;
-  }
-</style>
+<div class="list-boarder" id="gw-form-wrapper" style="display: none;">
+  <form id="gw-prompt-add-form">
+    <input type="text" name="title" placeholder="タイトル（任意）">
+    <textarea rows="10" name="prompt" placeholder="プロンプト（必須）"></textarea>
+    <input type="submit" value="プロンプトを保存" class="gw-button">
+  </form>
+  <button id="gw-back-list" class="gw-button">
+    一覧へ戻る
+  </button>
+</div>

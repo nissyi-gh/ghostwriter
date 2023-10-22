@@ -12,6 +12,9 @@
       "css": ["./content/chatgpt/content.css"]
     }
   ],
+  "background": {
+    "service_worker": "./background/background.js"
+  },
   "web_accessible_resources" : [
     {
       "matches": ["<all_urls>"],
