@@ -30,6 +30,23 @@ function initDB() {
   };
 }
 
+function addPromptToDB(title, prompt) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("prompts", "readwrite");
+    const objectStore = transaction.objectStore("prompts");
+    const request = objectStore.add({ title, prompt });
+
+    request.onsuccess = function(event) {
+      resolve(event.target.result);
+    };
+
+    request.onerror = function(event) {
+      console.error("Error adding prompt to DB:", event);
+      reject(new Error("Error adding prompt to DB."));
+    };
+  });
+}
+
 function deleteDB(callback) {
   const request = indexedDB.deleteDatabase("ghostWriterDB");
 
@@ -78,6 +95,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "get") {
     fetchAllPrompts().then(data => {
       sendResponse(data);
+    }).catch(error => {
+      sendResponse({error: error.message});
+    });
+    return true;
+  } else if (message.action === "add") {
+    addPromptToDB(message.title, message.prompt).then(id => {
+      sendResponse({id});
     }).catch(error => {
       sendResponse({error: error.message});
     });

@@ -35,6 +35,18 @@ function getTextFromDB() {
   });
 }
 
+function addPromptDB(title, prompt) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ action: "add", title: title, prompt: prompt }, (response) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError));
+      } else {
+        resolve(response);
+      }
+    });
+  });
+}
+
 const addLiPromptItem = (parentNode, title, prompt) => {
   const li = document.createElement('li');
   const titleElement = document.createElement('p');
@@ -96,6 +108,29 @@ const addPromptList = () => {
         const promptForm = document.getElementById("gw-form-wrapper");
         promptList.style.display = 'block';
         promptForm.style.display = 'none';
+      })
+
+      document.getElementById("gw-prompt-add-form").addEventListener('submit', (event) => {
+        event.preventDefault();
+        const title = document.querySelector('input[name="title"]').value;
+        const prompt = document.querySelector('textarea[name="prompt"]').value;
+
+        addPromptDB(title, prompt).then(() => {
+          const promptList = document.getElementById("ghost-writer-prompts");
+          addLiPromptItem(promptList, title, prompt);
+          document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
+            li.addEventListener('click', () => {
+              if (document.getElementById("selected")) {
+                document.getElementById("selected").removeAttribute("id");
+              }
+              li.setAttribute("id", "selected");
+            });
+          })
+          document.querySelector('input[name="title"]').value = '';
+          document.querySelector('textarea[name="prompt"]').value = '';
+          document.getElementById("gw-list-wrapper").style.display = 'block';
+          document.getElementById("gw-form-wrapper").style.display = 'none';
+        }).catch(error => console.error(error));
       })
     })
     .catch(error => console.error(error));
