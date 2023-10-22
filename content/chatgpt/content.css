@@ -4,7 +4,8 @@
   border-radius: 8px;
   width: 100%;
   position: absolute;
-  bottom: 120px;
+  bottom: calc(100% + 20px);
+  left: 0px;
   color: white;
   padding: 8px;
 }
