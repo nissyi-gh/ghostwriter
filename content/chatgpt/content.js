@@ -16,6 +16,15 @@ fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
 
       const promptTextArea = document.querySelector('#prompt-textarea')
       promptTextArea.parentNode.insertBefore(promptList, promptTextArea);
+
+      document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
+        li.addEventListener('click', () => {
+          if (document.getElementById("selected")) {
+            document.getElementById("selected").removeAttribute("id");
+          }
+          li.setAttribute("id", "selected");
+        });
+      })
     })
     .catch(error => console.error(error));
 
