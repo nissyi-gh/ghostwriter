@@ -6,6 +6,15 @@ ghostWriterButton.className = 'ghost-writer-button';
 
 ghostWriterButton.appendChild(ghostWriterIconImage);
 
+const applyPrompt = (prompt) => {
+  const lines = prompt.split("\n");
+  const textareaHeight = lines.length * 50;
+
+  const textarea = document.getElementById("prompt-textarea");
+  textarea.value = prompt;
+  textarea.style.height = `${textareaHeight}px`;
+}
+
 // プロンプトリストを描画する
 fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
     .then(response => response.text())
@@ -24,6 +33,12 @@ fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
           }
           li.setAttribute("id", "selected");
         });
+      })
+
+      // プロンプト適用ボタン
+      document.getElementById("gw-prompt-override").addEventListener('click', () => {
+        const prompt = document.getElementById("selected").innerText;
+        applyPrompt(prompt);
       })
     })
     .catch(error => console.error(error));
