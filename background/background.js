@@ -18,8 +18,12 @@ function initDB() {
     if (!db.objectStoreNames.contains('prompts')) {
       const promptsDb = db.createObjectStore("prompts", { keyPath: "id", autoIncrement: true });
       promptsDb.add({
-        title: "サンプルのプロンプト 優秀なWebエンジニア",
+        title: "サンプルのプロンプト1 優秀なWebエンジニア",
         prompt: "## 前提\nあなたは優秀なWebエンジニアです。以下の質問に回答してください。\n\n## 質問\n（ここに質問を書く）\n\n## 回答\n回答は必ず日本語で答えてください。"
+      });
+      promptsDb.add({
+        title: "サンプルのプロンプト2 英会話講師",
+        prompt: "## 前提\nあなたはとても優秀な英会話講師です。以下の質問に回答してください。\n\n## 質問\n（ここに質問を書く）\n\n## 回答\n基本的には英語で回答し、おかしいところは日本語で教えてください。"
       });
       console.log("ghostWriterDB's prompts object store created, and sample prompt added.");
     }
