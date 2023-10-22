@@ -44,3 +44,9 @@
 #ghost-writer-prompts > li:last-child {
   border-bottom: none;
 }
+
+.gw-prompt-title {
+  font-weight: bold;
+  background-color: #545454;
+  margin-bottom: 4px;
+}
