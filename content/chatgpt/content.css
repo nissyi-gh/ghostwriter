@@ -57,3 +57,13 @@
   align-items: left;
   width: 100%;
 }
+
+#gw-prompt-add-form > input, #gw-prompt-add-form > textarea{
+  color: black;
+  margin-bottom: 4px;
+}
+
+#gw-prompt-add-form > .gw-button{
+  color: white;
+  background-color: #5c5c5c;
+}
