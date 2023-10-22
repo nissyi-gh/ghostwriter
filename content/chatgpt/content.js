@@ -42,6 +42,7 @@ const addLiPromptItem = (parentNode, title, prompt) => {
 
   titleElement.innerText = title;
   promptElement.innerText = prompt;
+  promptElement.className = 'prompt';
   li.appendChild(titleElement);
   li.appendChild(promptElement);
   parentNode.appendChild(li);
@@ -76,7 +77,7 @@ const addPromptList = () => {
 
       // プロンプト適用ボタン
       document.getElementById("gw-prompt-override").addEventListener('click', () => {
-        const prompt = document.getElementById("selected").innerText;
+        const prompt = document.getElementById("selected").querySelector('.prompt').innerText;
         applyPrompt(prompt);
       })
     })
