@@ -41,8 +41,9 @@ const addLiPromptItem = (parentNode, title, prompt) => {
   const promptElement = document.createElement('p');
 
   titleElement.innerText = title;
+  titleElement.className = 'gw-prompt-title';
   promptElement.innerText = prompt;
-  promptElement.className = 'prompt';
+  promptElement.className = 'gw-prompt';
   li.appendChild(titleElement);
   li.appendChild(promptElement);
   parentNode.appendChild(li);
