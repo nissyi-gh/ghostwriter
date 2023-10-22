@@ -78,7 +78,7 @@ const addPromptList = () => {
 
       // プロンプト適用ボタン
       document.getElementById("gw-prompt-override").addEventListener('click', () => {
-        const prompt = document.getElementById("selected").querySelector('.prompt').innerText;
+        const prompt = document.getElementById("selected").querySelector('.gw-prompt').innerText;
         applyPrompt(prompt);
       })
     })
