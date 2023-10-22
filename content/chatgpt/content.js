@@ -24,13 +24,30 @@ const applyPrompt = (prompt) => {
 }
 
 function getTextFromDB() {
-  chrome.runtime.sendMessage({ action: "get" }, (data) => {
-    console.log(data);
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ action: "get" }, (data) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError));
+      } else {
+        resolve(data);
+      }
+    });
   });
 }
 
+const addLiPromptItem = (parentNode, title, prompt) => {
+  const li = document.createElement('li');
+  const titleElement = document.createElement('p');
+  const promptElement = document.createElement('p');
+
+  titleElement.innerText = title;
+  promptElement.innerText = prompt;
+  li.appendChild(titleElement);
+  li.appendChild(promptElement);
+  parentNode.appendChild(li);
+}
+
 const addPromptList = () => {
-  getTextFromDB();
   // プロンプトリストを描画する
   fetch(chrome.runtime.getURL('content/chatgpt/prompt_list.html'))
     .then(response => response.text())
@@ -41,6 +58,13 @@ const addPromptList = () => {
 
       const promptTextArea = document.querySelector('#prompt-textarea')
       promptTextArea.parentNode.insertBefore(promptList, promptTextArea);
+
+      getTextFromDB().then(data => {
+        const promptList = document.getElementById("ghost-writer-prompts");
+        data.forEach((prompt) => {
+          addLiPromptItem(promptList, prompt.title, prompt.prompt);
+        })
+      }).catch(error => console.error(error));
 
       document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
         li.addEventListener('click', () => {
