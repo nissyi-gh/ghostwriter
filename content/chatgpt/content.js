@@ -81,6 +81,21 @@ const addPromptList = () => {
         const prompt = document.getElementById("selected").querySelector('.gw-prompt').innerText;
         applyPrompt(prompt);
       })
+
+      // プロンプト追加フォーム
+      document.getElementById("gw-prompt-add").addEventListener('click', () => {
+        console.log("click");
+        const promptList = document.getElementById("ghost-writer-prompts");
+        const promptForm = document.getElementById("gw-prompt-add-form");
+
+        if (promptList.style.display == 'none') {
+          promptList.style.display = 'block';
+          promptForm.style.display = 'none';
+        } else {
+          promptList.style.display = 'none';
+          promptForm.style.display = 'block';
+        }
+      })
     })
     .catch(error => console.error(error));
 }
