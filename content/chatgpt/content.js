@@ -3,6 +3,14 @@ ghostWriterIconImage.src = chrome.runtime.getURL('images/ghost_writer_128.png');
 
 const ghostWriterButton = document.createElement('button');
 ghostWriterButton.className = 'ghost-writer-button';
+ghostWriterButton.addEventListener('click', () => {
+  const promptList = document.getElementById("gw-list-wrapper")
+  if (promptList.hasAttribute("hidden")) {
+    promptList.removeAttribute("hidden");
+  } else {
+    promptList.setAttribute("hidden", true);
+  }
+})
 
 ghostWriterButton.appendChild(ghostWriterIconImage);
 
