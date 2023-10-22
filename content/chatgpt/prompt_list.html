@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <div class="list-boarder" id="gw-list-wrapper" hidden="true">
   <ol id="ghost-writer-prompts"></ol>
-  <form id="gw-prompt-add-form">
-    <input type="text" placeholder="タイトル">
-    <textarea rows="10" placeholder="プロンプト"></textarea>
-    <input type="submit" value="プロンプトを保存" class="gw-button">
-  </form>
   <hr>
   <p>適用したいプロンプトを選んでね。</p>
   <button id="gw-prompt-override" class="gw-button">
@@ -13,5 +8,15 @@
   </button>
   <button id="gw-prompt-add" class="gw-button">
     プロンプトの追加
+  </button>
+</div>
+<div class="list-boarder" id="gw-form-wrapper" style="display: none;">
+  <form id="gw-prompt-add-form">
+    <input type="text" placeholder="タイトル">
+    <textarea rows="10" placeholder="プロンプト"></textarea>
+    <input type="submit" value="プロンプトを保存" class="gw-button">
+  </form>
+  <button id="gw-back-list" class="gw-button">
+    一覧へ戻る
   </button>
 </div>

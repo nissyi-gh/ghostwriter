@@ -84,17 +84,18 @@ const addPromptList = () => {
 
       // プロンプト追加フォーム
       document.getElementById("gw-prompt-add").addEventListener('click', () => {
-        console.log("click");
-        const promptList = document.getElementById("ghost-writer-prompts");
-        const promptForm = document.getElementById("gw-prompt-add-form");
+        const promptList = document.getElementById("gw-list-wrapper");
+        const promptForm = document.getElementById("gw-form-wrapper");
+        promptList.style.display = 'none';
+        promptForm.style.display = 'block';
+      })
 
-        if (promptList.style.display == 'none') {
-          promptList.style.display = 'block';
-          promptForm.style.display = 'none';
-        } else {
-          promptList.style.display = 'none';
-          promptForm.style.display = 'block';
-        }
+      // 一覧へ戻る
+      document.getElementById("gw-back-list").addEventListener('click', () => {
+        const promptList = document.getElementById("gw-list-wrapper");
+        const promptForm = document.getElementById("gw-form-wrapper");
+        promptList.style.display = 'block';
+        promptForm.style.display = 'none';
       })
     })
     .catch(error => console.error(error));
