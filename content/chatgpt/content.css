@@ -74,6 +74,20 @@
   cursor: pointer;
 }
 
+.gw-prompt-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gw-prompt-copy {
+  color: rgb(144, 196, 255);
+  margin-right: 4px;
+}
+
+.gw-prompt-copy:hover {
+  color: rgb(89, 154, 253);
+  cursor: pointer;
+}
 
 #gw-prompt-add-form {
   display: flex;

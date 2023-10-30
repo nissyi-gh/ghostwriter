@@ -62,16 +62,23 @@ function deletePromptDB(id) {
 const addLiPromptItem = (parentNode, id, title, prompt) => {
   const li = document.createElement('li');
   const titleHeader = document.createElement('div');
+  const titleActions = document.createElement('div');
+  const copyButton = document.createElement('div');
   const deleteButton = document.createElement('div');
   const titleElement = document.createElement('p');
   const promptElement = document.createElement('p');
 
   titleElement.innerText = title;
+  copyButton.innerText = 'コピー';
+  copyButton.className = 'gw-prompt-copy';
   deleteButton.innerText = '削除';
   deleteButton.className = 'gw-prompt-delete';
   titleHeader.className = 'gw-prompt-title';
+  titleActions.className = 'gw-prompt-actions';
+  titleActions.appendChild(copyButton);
+  titleActions.appendChild(deleteButton);
   titleHeader.appendChild(titleElement);
-  titleHeader.appendChild(deleteButton);
+  titleHeader.appendChild(titleActions);
   promptElement.innerText = prompt;
   promptElement.className = 'gw-prompt';
   li.appendChild(titleHeader);
@@ -86,6 +93,13 @@ const addLiPromptItem = (parentNode, id, title, prompt) => {
       }).catch(error => console.error(error));
     }
   })
+
+  copyButton.addEventListener('click', () => {
+    navigator.clipboard.writeText(prompt).then(() => {
+      alert('コピーしました！');
+  }, (err) => {
+      alert('コピーに失敗しました: ', err);
+  })});
 }
 
 const addPromptList = () => {
