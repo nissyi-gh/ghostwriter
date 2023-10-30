@@ -93,6 +93,13 @@ const addLiPromptItem = (parentNode, id, title, prompt) => {
       }).catch(error => console.error(error));
     }
   })
+
+  copyButton.addEventListener('click', () => {
+    navigator.clipboard.writeText(prompt).then(() => {
+      alert('コピーしました！');
+  }, (err) => {
+      alert('コピーに失敗しました: ', err);
+  })});
 }
 
 const addPromptList = () => {
