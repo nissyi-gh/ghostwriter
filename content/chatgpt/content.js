@@ -148,9 +148,9 @@ const addPromptList = () => {
           return;
         }
 
-        addPromptDB(title, prompt).then(() => {
+        addPromptDB(title, prompt).then((id) => {
           const promptList = document.getElementById("ghost-writer-prompts");
-          addLiPromptItem(promptList, title, prompt);
+          addLiPromptItem(promptList, id, title, prompt);
           document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
             li.addEventListener('click', () => {
               if (document.getElementById("selected")) {
