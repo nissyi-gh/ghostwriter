@@ -32,11 +32,10 @@
 }
 
 .ghost-writer-button {
+  align-self: flex-end;
   height: 40px;
   width: 40px;
-  bottom: 8px;
-  position: absolute;
-  right: 40px;
+  margin-bottom: 8px;
 }
 
 @media (max-width: 767px) {
