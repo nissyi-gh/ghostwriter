@@ -88,6 +88,23 @@ function fetchAllPrompts() {
   });
 }
 
+function deletePromptFromDB(id) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("prompts", "readwrite");
+    const objectStore = transaction.objectStore("prompts");
+    const request = objectStore.delete(id);
+
+    request.onsuccess = function(event) {
+      resolve();
+    };
+
+    request.onerror = function(event) {
+      console.error("Error deleting prompt from DB:", event);
+      reject(new Error("Error deleting prompt from DB."));
+    };
+  });
+}
+
 initDB();
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -102,6 +119,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.action === "add") {
     addPromptToDB(message.title, message.prompt).then(id => {
       sendResponse({id});
+    }).catch(error => {
+      sendResponse({error: error.message});
+    });
+    return true;
+  } else if (message.action === "delete") {
+    deletePromptFromDB(message.id).then(() => {
+      sendResponse({});
     }).catch(error => {
       sendResponse({error: error.message});
     });

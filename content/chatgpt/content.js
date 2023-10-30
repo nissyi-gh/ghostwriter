@@ -47,6 +47,18 @@ function addPromptDB(title, prompt) {
   });
 }
 
+function deletePromptDB(id) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ action: "delete", id: id }, (response) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError));
+      } else {
+        resolve(response);
+      }
+    });
+  });
+}
+
 const addLiPromptItem = (parentNode, id, title, prompt) => {
   const li = document.createElement('li');
   const titleHeader = document.createElement('div');
@@ -66,6 +78,14 @@ const addLiPromptItem = (parentNode, id, title, prompt) => {
   li.appendChild(promptElement);
   li.dataset.id = id;
   parentNode.appendChild(li);
+
+  deleteButton.addEventListener('click', () => {
+    if (confirm(`「${title}」を削除しますか？`)) {
+      deletePromptDB(id).then(() => {
+        li.remove();
+      }).catch(error => console.error(error));
+    }
+  })
 }
 
 const addPromptList = () => {
