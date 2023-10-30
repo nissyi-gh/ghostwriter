@@ -47,7 +47,7 @@ function addPromptDB(title, prompt) {
   });
 }
 
-const addLiPromptItem = (parentNode, title, prompt) => {
+const addLiPromptItem = (parentNode, id, title, prompt) => {
   const li = document.createElement('li');
   const titleHeader = document.createElement('div');
   const deleteButton = document.createElement('div');
@@ -64,6 +64,7 @@ const addLiPromptItem = (parentNode, title, prompt) => {
   promptElement.className = 'gw-prompt';
   li.appendChild(titleHeader);
   li.appendChild(promptElement);
+  li.dataset.id = id;
   parentNode.appendChild(li);
 }
 
@@ -82,7 +83,7 @@ const addPromptList = () => {
       getTextFromDB().then(data => {
         const promptList = document.getElementById("ghost-writer-prompts");
         data.forEach((prompt) => {
-          addLiPromptItem(promptList, prompt.title, prompt.prompt);
+          addLiPromptItem(promptList, prompt.id, prompt.title, prompt.prompt);
           document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
             li.addEventListener('click', () => {
               if (document.getElementById("selected")) {
