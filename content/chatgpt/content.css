@@ -61,7 +61,19 @@
   font-weight: bold;
   background-color: #545454;
   margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
 }
+
+.gw-prompt-delete {
+  color: rgb(254, 170, 170);
+}
+
+.gw-prompt-delete:hover {
+  color: rgb(251, 67, 67);
+  cursor: pointer;
+}
+
 
 #gw-prompt-add-form {
   display: flex;

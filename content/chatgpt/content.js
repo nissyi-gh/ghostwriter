@@ -49,14 +49,20 @@ function addPromptDB(title, prompt) {
 
 const addLiPromptItem = (parentNode, title, prompt) => {
   const li = document.createElement('li');
+  const titleHeader = document.createElement('div');
+  const deleteButton = document.createElement('div');
   const titleElement = document.createElement('p');
   const promptElement = document.createElement('p');
 
   titleElement.innerText = title;
-  titleElement.className = 'gw-prompt-title';
+  deleteButton.innerText = '削除';
+  deleteButton.className = 'gw-prompt-delete';
+  titleHeader.className = 'gw-prompt-title';
+  titleHeader.appendChild(titleElement);
+  titleHeader.appendChild(deleteButton);
   promptElement.innerText = prompt;
   promptElement.className = 'gw-prompt';
-  li.appendChild(titleElement);
+  li.appendChild(titleHeader);
   li.appendChild(promptElement);
   parentNode.appendChild(li);
 }
