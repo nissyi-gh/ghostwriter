@@ -87,8 +87,8 @@ function fetchAllPrompts() {
     };
   });
 }
-// 初期化の実験を開始
-deleteDB(initDB);
+
+initDB();
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log(message);
