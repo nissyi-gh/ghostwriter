@@ -143,8 +143,8 @@ const addPromptList = () => {
 }
 
 const addGhostWriter = () => {
-  const buttonElement = document.querySelector('[data-testid="send-button"]');
-  buttonElement.parentNode.insertBefore(ghostWriterButton, buttonElement);
+  const targetElement = document.querySelector('form > div > div.flex.w-full.items-center div');
+  targetElement.parentNode.insertBefore(ghostWriterButton, targetElement);
   addPromptList();
 };
 
