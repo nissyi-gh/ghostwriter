@@ -70,8 +70,8 @@ const addPromptList = () => {
       promptList.innerHTML = data;
       promptList.className = 'ghost-writer-prompt-list';
 
-      const promptTextArea = document.querySelector('#prompt-textarea')
-      promptTextArea.parentNode.insertBefore(promptList, promptTextArea);
+      const gwButton = document.querySelector('.ghost-writer-button')
+      gwButton.parentNode.insertBefore(promptList, gwButton);
 
       getTextFromDB().then(data => {
         const promptList = document.getElementById("ghost-writer-prompts");
