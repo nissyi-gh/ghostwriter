@@ -47,18 +47,45 @@ function addPromptDB(title, prompt) {
   });
 }
 
-const addLiPromptItem = (parentNode, title, prompt) => {
+function deletePromptDB(id) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ action: "delete", id: id }, (response) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError));
+      } else {
+        resolve(response);
+      }
+    });
+  });
+}
+
+const addLiPromptItem = (parentNode, id, title, prompt) => {
   const li = document.createElement('li');
+  const titleHeader = document.createElement('div');
+  const deleteButton = document.createElement('div');
   const titleElement = document.createElement('p');
   const promptElement = document.createElement('p');
 
   titleElement.innerText = title;
-  titleElement.className = 'gw-prompt-title';
+  deleteButton.innerText = '削除';
+  deleteButton.className = 'gw-prompt-delete';
+  titleHeader.className = 'gw-prompt-title';
+  titleHeader.appendChild(titleElement);
+  titleHeader.appendChild(deleteButton);
   promptElement.innerText = prompt;
   promptElement.className = 'gw-prompt';
-  li.appendChild(titleElement);
+  li.appendChild(titleHeader);
   li.appendChild(promptElement);
+  li.dataset.id = id;
   parentNode.appendChild(li);
+
+  deleteButton.addEventListener('click', () => {
+    if (confirm(`「${title}」を削除しますか？`)) {
+      deletePromptDB(id).then(() => {
+        li.remove();
+      }).catch(error => console.error(error));
+    }
+  })
 }
 
 const addPromptList = () => {
@@ -76,7 +103,7 @@ const addPromptList = () => {
       getTextFromDB().then(data => {
         const promptList = document.getElementById("ghost-writer-prompts");
         data.forEach((prompt) => {
-          addLiPromptItem(promptList, prompt.title, prompt.prompt);
+          addLiPromptItem(promptList, prompt.id, prompt.title, prompt.prompt);
           document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
             li.addEventListener('click', () => {
               if (document.getElementById("selected")) {
@@ -121,9 +148,9 @@ const addPromptList = () => {
           return;
         }
 
-        addPromptDB(title, prompt).then(() => {
+        addPromptDB(title, prompt).then((id) => {
           const promptList = document.getElementById("ghost-writer-prompts");
-          addLiPromptItem(promptList, title, prompt);
+          addLiPromptItem(promptList, id, title, prompt);
           document.querySelectorAll('#ghost-writer-prompts > li').forEach((li) => {
             li.addEventListener('click', () => {
               if (document.getElementById("selected")) {
